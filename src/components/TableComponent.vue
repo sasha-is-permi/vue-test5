@@ -1,21 +1,29 @@
-<template>
+ <template>
   <div>
         <table >
-            <tr class="th">
+
+        <div class="table-responsive">
+        	<tbody>
+           <div>
+
+        		 <tr>
             <th >Имя</th>
             <th>Телефон</th>
-          </tr>
-         <div v-for="item in table" :key="item.name">
-              <tr> 
+	         	</tr>     
+              <tr  v-for="item in table" :key="item.name" > 
                 <td> {{item.name}} </td>
                 <td> {{item.tel}} </td>
                </tr>
          </div>
+      	</tbody>
+        </div>
+         
+         </table>
 
 
-        </table>
-   
-  </div>
+</div>
+
+
 </template>
 
 <script>
@@ -32,16 +40,23 @@ export default {
 
 <style scoped>
 
-table {
-   border: 1px solid grey;
-    min-width: 300px;
 
+
+
+table{
+border-collapse:collapse;
+border-spacing:0
 }
-
-.th {
-   border: 1px solid grey;
-    min-width: 300px;
-
+table, td, th{
+border: 1px solid #595959;
+}
+td, th{
+padding: 20px;
+width: 30px;
+height: 25px;
+}
+th{
+background-color: #7accee!important;
 }
 
 </style>
