@@ -37,8 +37,50 @@ export default {
   methods:{
     addRow(){
         this.table.push(this.form);
-    }
-  }
+    
+    //   Объект сохранен в localStorage
+       localStorage.setItem("table1",JSON.stringify(this.table))
+
+   
+
+
+    },
+     setData() {                    
+                 // Перебор уже существующих значений в localStorage 
+    for(let i=0; i<localStorage.length; i++) {
+ 
+    // Получаем по ключу записанный в localStorage объект
+    let item = localStorage.getItem ( localStorage.key(i) );  
+      
+    let isJSON = true;
+   
+    try {
+     JSON.parse(item);
+    } catch (e) {
+    //  console.log('строка не в формате JSON:',item);
+      isJSON = false;
+    }  
+
+     // Если строка их хранища не в формате JSON- 
+     // переходим на начало цикла, пропускаем данное значение
+     if  (isJSON === false) continue;
+      
+     // А если в формате JSON- применяем функцию parse
+
+     if  (localStorage.key(i)==="table1"){         
+        this.table = JSON.parse(item);
+          console.log('table',this.table);
+            } 
+    
+
+  }                
+                            }
+  },
+     // Считываем из localstorage записанный массив объектов table
+     mounted() {
+             this.setData();
+      },
+
 }
 </script>
 

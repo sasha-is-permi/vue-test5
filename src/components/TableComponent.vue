@@ -10,7 +10,7 @@
             <th >Имя</th>
             <th>Телефон</th>
 	         	</tr>     
-              <tr  v-for="item in table" :key="item.name" > 
+              <tr  v-for="(item,index)  in table" :key="index" > 
                 <td> {{item.name}} </td>
                 <td> {{item.tel}} </td>
                </tr>
