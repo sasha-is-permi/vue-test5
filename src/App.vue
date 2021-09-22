@@ -8,8 +8,9 @@
           <div id="space2">   </div>     <!-- Отступ от таблицы -->
         <!-- Слушаем событие "close" - если оно произошло в ModalComponent- isModalVisible=false (скрываем модальное окно)  
              Слушаем событие "onSubmit" - если оно произошло в ModalComponent- получаем от него данные формы (объект form)
+             Передаем в ModalComponent массив объектов table и переменную isModalVisible
         -->  
-       <ModalComponent :isModalVisible="isModalVisible" @close="isModalVisible=false" @onSubmit="form=$event; isModalVisible=false; addRow()"/>  <!-- Компонент "Диалоговое окно" -->
+       <ModalComponent :table="table"  :isModalVisible="isModalVisible" @close="isModalVisible=false" @onSubmit="form=$event; isModalVisible=false; addRow()"/>  <!-- Компонент "Диалоговое окно" -->
       
     </div>   
   </div>

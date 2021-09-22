@@ -15,25 +15,40 @@
            <label for="tel">Телефон</label>
            <input type="tel" id="tel" v-model="tel">
            </div>
-          <div class="form-row">
-           <button class="button" type="submit" @click="onSubmit">Отправить</button>
-          </div>
 
+           <div class="form-row">
+           <label for="boss">Начальник</label>
+
+          <select v-model="selected" id="boss">
+          <option v-for="(item,index) in table" v-bind:value="item" :key="index">
+             {{ item.name }}
+          </option>
+          </select>
+           <span>Выбрано: {{ selected }}</span>
+
+           </div>
+
+          <div class="form-row">
+
+           <button class="button" type="submit" @click="onSubmit">Отправить</button>
+          </div>        
           </fieldset> 
         </form>
-  
+            
   </div>
 </template>
 
 <script>
 export default {
   name: 'ButtonComponent',
-  // Принимаем переменную isModalVisible как параметр из другого компонента
-   props: ['isModalVisible'],
+  // Принимаем переменные isModalVisible и массив объектов table как параметры из компонента App
+   props: ['isModalVisible','table'],
   data () {
     return {
       name:"",
-      tel:""    
+      tel:"",
+      selected:""
+
     }
   },
   methods:{
@@ -43,8 +58,9 @@ export default {
 },
 // Передаем событие "onSubmit" в родительский компонент App вместе с данными формы
          onSubmit(){
-           let form= {name:this.name, tel:this.tel}
+           let form= {name:this.name, tel:this.tel,boss:this.selected}
            this.$emit('onSubmit',form);
+           console.log('form',form)
          }
   }
 }
