@@ -12,14 +12,14 @@
 	         	</tr>     
               <tr  v-for="(item,index)  in table" :key="index" > 
                 <td> {{item.name}} </td>
-                <td> {{item.tel}} </td>
+                <td> {{item.tel}} </td>                
                </tr>
          </div>
       	</tbody>
         </div>
          
          </table>
-
+         
 
 </div>
 

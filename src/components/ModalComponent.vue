@@ -9,7 +9,10 @@
         </div>  
            <div class="form-row">
            <label for="name">Имя</label>
-           <input type="text" id="name" v-model="name">
+           <input type="text" id="name" v-model="name" @input="changeError">
+          </div>
+          <div class="form-row red" v-show="error===true">
+                 {{"Введите имя!!!"}}
           </div>
           <div class="form-row">
            <label for="tel">Телефон</label>
@@ -24,7 +27,7 @@
              {{ item.name }}
           </option>
           </select>
-           <span>Выбрано: {{ selected }}</span>
+       <!--    <span>Выбрано: {{ selected }}</span> -->
 
            </div>
 
@@ -47,7 +50,9 @@ export default {
     return {
       name:"",
       tel:"",
-      selected:""
+      selected:"",
+      error:false
+
 
     }
   },
@@ -58,9 +63,28 @@ export default {
 },
 // Передаем событие "onSubmit" в родительский компонент App вместе с данными формы
          onSubmit(){
+           // Если не задано имя- не отправляем данные
+           if (!this.name) {             
+             this.error=true;
+             return;
+           }            
+           
            let form= {name:this.name, tel:this.tel,boss:this.selected}
            this.$emit('onSubmit',form);
            console.log('form',form)
+
+           this.name="";
+           this.tel="";
+           this.selected="";
+           this.error=false;      
+           
+         },
+         changeError(){
+            if (!this.name){
+             this.error=true;
+             return;
+           } 
+           this.error=false;        
          }
   }
 }
@@ -112,4 +136,7 @@ fieldset{
   padding: 10px 20px 20px 20px;
 }
 
+.red{
+  color:red;
+}
 </style>
