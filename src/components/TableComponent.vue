@@ -13,7 +13,10 @@
 	         	</tr>     
               <tr  v-for="(item,index)  in table" :key="index" >                 
                 <td> {{item.name}} </td>
-                <td> {{item.tel}} </td>                
+                <td> {{item.tel}} </td>      
+                 <td v-if="(typeof item.employee!=='string')"> {{item.employee.name}} </td>
+                 <td v-if="(typeof item.employee!=='string')"> {{item.employee.tel}} </td>
+
                </tr>
          </div>
       	</tbody>
