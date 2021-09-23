@@ -7,10 +7,11 @@
            <div>
 
         		 <tr>
-            <th >Имя</th>
-            <th>Телефон</th>
+               <!-- При щелчке на заголовках генерируются события, которые будут обрабатываться в App -->
+            <th @click="sortName">Имя</th>
+            <th @click="sortTel">Телефон</th>
 	         	</tr>     
-              <tr  v-for="(item,index)  in table" :key="index" > 
+              <tr  v-for="(item,index)  in table" :key="index" >                 
                 <td> {{item.name}} </td>
                 <td> {{item.tel}} </td>                
                </tr>
@@ -19,7 +20,8 @@
         </div>
          
          </table>
-         
+
+    
 
 </div>
 
@@ -34,6 +36,15 @@ export default {
     return {
 
     }
+  },
+  methods:{
+  sortName(){
+     this.$emit('sortName',true)
+  },
+  sortTel(){
+     this.$emit('sortTel',true)
+}
+
   }
 }
 </script>

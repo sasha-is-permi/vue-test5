@@ -3,8 +3,9 @@
     <ButtonComponent :isModalVisible="isModalVisible" @modalVisible="isModalVisible=$event" />            <!-- Компонент-кнопка -->
     <div id="space1">   </div>     <!-- Отступ от кнопки  --> 
     <div id="main">
-      <!-- Передаем в дочерний компонент table объект table со значение таблицы -->
-       <TableComponent id="table" :table="table"/>  <!-- Компонент "таблица" -->
+      <!-- Передаем в дочерний компонент table объект table со значение таблицы
+      Из таблицы ловим события sortName и sortTel и вызываем аналогичные функции этого модуля -->
+       <TableComponent id="table" :table="table"   @sortName="sortName()"  @sortTel="sortTel()"      />  <!-- Компонент "таблица" -->
           <div id="space2">   </div>     <!-- Отступ от таблицы -->
         <!-- Слушаем событие "close" - если оно произошло в ModalComponent- isModalVisible=false (скрываем модальное окно)  
              Слушаем событие "onSubmit" - если оно произошло в ModalComponent- получаем от него данные формы (объект form)
@@ -41,11 +42,27 @@ export default {
     
     //   Объект сохранен в localStorage
        localStorage.setItem("table1",JSON.stringify(this.table))
-
-   
-
-
     },
+    sortName(){
+       this.table.sort(function(a, b){
+           let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
+             if (nameA < nameB) //сортируем строки по возрастанию
+                return -1
+             if (nameA > nameB)
+             return 1
+           return 0 // Никакой сортировки
+            })
+    },
+    sortTel(){
+       this.table.sort(function(a, b){
+           let telA=a.tel, telB=b.tel
+             if (telA < telB) //сортируем строки по возрастанию
+                return -1
+             if (telA > telB)
+             return 1
+           return 0 // Никакой сортировки
+            })
+    }, 
      setData() {                    
                  // Перебор уже существующих значений в localStorage 
     for(let i=0; i<localStorage.length; i++) {
