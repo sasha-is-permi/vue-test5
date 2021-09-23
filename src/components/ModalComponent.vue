@@ -24,12 +24,13 @@
 
           <select v-model="selected" id="boss">
           <option v-for="(item,index) in table" v-bind:value="item" :key="index">
-             {{ item.name }}
+             {{ item.name }} 
           </option>
           </select>
-       <!--    <span>Выбрано: {{ selected }}</span> -->
+       <!--    <span>Выбрано: {{ selected }}</span>-->
 
            </div>
+
 
           <div class="form-row">
 
@@ -51,9 +52,8 @@ export default {
       name:"",
       tel:"",
       selected:"",
-      error:false
-
-
+      error:false,
+      selectedIndex:""
     }
   },
   methods:{
@@ -69,9 +69,12 @@ export default {
              return;
            }            
            
+        //  console.log("selectedIndex",this.selectedIndex)
+        //   console.log("boss",this.selected)
+
            let form= {name:this.name, tel:this.tel,boss:this.selected}
            this.$emit('onSubmit',form);
-           console.log('form',form)
+       //    console.log('form',form)
 
            this.name="";
            this.tel="";
@@ -79,6 +82,8 @@ export default {
            this.error=false;      
            
          },
+
+
          changeError(){
             if (!this.name){
              this.error=true;

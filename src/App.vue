@@ -37,8 +37,48 @@ export default {
     }
   },
   methods:{
-    addRow(){
-        this.table.push(this.form);
+    addRow(){       
+       
+         let index= this.table.length  ; // определение индекса для  добавляемого в таблицу элемента. Он будет выполнять роль id
+         console.log("index",index);
+
+         this.form.id= index;        // новый индекс для  добавляемого в таблицу элемента. Он будет выполнять роль id
+        // console.log("form1",this.form);         
+         
+          if ((typeof this.form.boss)=="string"){  // если у сотрудника нет начальника- добавляем полученные данные из form в таблицу
+              let form1= {}
+              form1.id= this.form.id; 
+              form1.name= this.form.name;           // добавляем в таблицу нового сотрудника. У него нет сотрудников в подчинении
+              form1.tel=  this.form.tel;            // (поле employees пустое)
+              form1.employee="";
+
+              this.table.push(form1);
+          }
+          else {   // Если есть начальник- добавляем к нему вновь добавившегося сотрудника из form
+              let bossId = this.form.boss.id;
+              let form = this.form;
+            //  console.log("bossId",bossId);
+
+              this.table.forEach(function(item) {
+                  if(item.id === bossId){
+
+                      console.log("item",item)
+                      console.log("form",form)  
+                      
+                      item.employee={}
+                      item.employee.id =  form.id
+                      item.employee.name = form.name  
+                      item.employee.tel = form.tel                      
+                      item.employee.employee = ""
+
+                      }
+                      
+              })
+
+          }
+         console.log("table1",this.table)   
+
+       
     
     //   Объект сохранен в localStorage
        localStorage.setItem("table1",JSON.stringify(this.table))
@@ -46,7 +86,7 @@ export default {
     sortName(){
        this.table.sort(function(a, b){
            let nameA=a.name.toLowerCase(), nameB=b.name.toLowerCase()
-             if (nameA < nameB) //сортируем строки по возрастанию
+             if (nameA < nameB) //сортируем  по возрастанию
                 return -1
              if (nameA > nameB)
              return 1
@@ -56,7 +96,7 @@ export default {
     sortTel(){
        this.table.sort(function(a, b){
            let telA=a.tel, telB=b.tel
-             if (telA < telB) //сортируем строки по возрастанию
+             if (telA < telB) //сортируем  по возрастанию
                 return -1
              if (telA > telB)
              return 1
