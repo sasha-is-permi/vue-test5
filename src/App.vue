@@ -60,16 +60,38 @@ export default {
             //  console.log("bossId",bossId);
 
               this.table.forEach(function(item) {
-                  if(item.id === bossId){
+                  if(item.id === bossId){ // нашли начальника для добавляемого человека и к нему в employee человека добавляем
 
                       console.log("item",item)
                       console.log("form",form)  
                       
-                      item.employee={}
-                      item.employee.id =  form.id
-                      item.employee.name = form.name  
-                      item.employee.tel = form.tel                      
-                      item.employee.employee = ""
+                      if ((typeof item.employee)=="string"){
+
+                        item.employee=[]
+
+                        let employeeObj={}
+                        employeeObj.id =  form.id
+                        employeeObj.name = form.name  
+                        employeeObj.tel = form.tel                      
+                        employeeObj.employee = ""
+
+                        item.employee.push(employeeObj);   // массив сотрудников у начальника. Если сотрудник первый
+
+                      }  
+
+                      else {
+                       
+                        let employeeObj={}
+                        employeeObj.id =  form.id
+                        employeeObj.name = form.name  
+                        employeeObj.tel = form.tel                      
+                        employeeObj.employee = ""
+
+                        item.employee.push(employeeObj); // массив сотрудников у начальника. Если сотрудник не первый
+
+                      }
+                    
+
 
                       }
                       
