@@ -28,8 +28,10 @@
         </div>
                      
          </table>
-   <h2>Структура данных (для понимания тестового задания):</h2>
+  <!-- <div class="data">      
+   <h3>Структура данных (для понимания тестового задания):</h3>
    {{table}} 
+   </div> -->
 
 </div>
 
@@ -76,6 +78,10 @@ height: 25px;
 }
 th{
 background-color: #7accee!important;
+}
+
+.data{
+  margin-top: 500px ;
 }
 
 </style>
